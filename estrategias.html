@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Estrategias | Grupo y Estrategias Legales VASA</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navyVasa: '#0a192f',
+                        goldVasa: '#b8913a',
+                        fondoVasa: '#f8f9fa',
+                        slateVasa: '#64748b',
+                    },
+                    fontFamily: {
+                        titulo: ['Playfair Display', 'serif'],
+                        cuerpo: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+
+        /* Menú overlay */
+        #menu-overlay { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* Tarjetas de servicio */
+        .service-card {
+            border-left: 3px solid #b8913a;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .service-card:hover {
+            box-shadow: 0 12px 40px rgba(10,25,47,0.10);
+            transform: translateY(-4px);
+        }
+
+        /* Pasos del proceso */
+        .step-number {
+            width: 52px; height: 52px;
+            border: 2px solid #b8913a;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: #b8913a;
+            flex-shrink: 0;
+        }
+        .step-line {
+            width: 2px;
+            background: linear-gradient(to bottom, #b8913a, transparent);
+            margin: 0 auto;
+            flex: 1;
+            min-height: 32px;
+        }
+
+        /* Formulario */
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #d1d5db;
+            background: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            color: #0a192f;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus { border-color: #b8913a; }
+        .form-input::placeholder { color: #9ca3af; }
+
+        .btn-send {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 36px;
+            background: #0a192f;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2px;
+            border: none; cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            justify-content: center;
+        }
+        .btn-send:hover { background: #b8913a; }
+    </style>
+</head>
+<body class="bg-fondoVasa font-cuerpo text-navyVasa antialiased overflow-x-hidden">
+
+    <!-- NAV BAR -->
+    <nav class="bg-white/95 backdrop-blur-md shadow-sm fixed w-full z-50 h-20">
+        <div class="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <a href="index.html"><img src="logo.png" alt="VASA Logo" class="h-10 w-auto" onerror="this.src='https://placehold.co/80x40?text=VASA';"></a>
+                <div class="hidden sm:block border-l border-gray-200 pl-4">
+                    <span class="block font-titulo font-bold text-xl">VASA</span>
+                    <span class="block text-[9px] uppercase tracking-[0.2em] text-goldVasa font-bold">Estrategias Legales</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://wa.me/525628472872" target="_blank"
+                   class="px-4 py-2 bg-navyVasa text-white font-bold text-[10px] lg:text-xs rounded-sm hover:bg-goldVasa transition flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-sm lg:text-lg"></i> <span>CONTACTO</span>
+                </a>
+                <button id="hamburger-btn" class="text-navyVasa text-2xl p-1 hover:text-goldVasa transition">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- OVERLAY -->
+    <div id="menu-overlay" class="fixed inset-0 z-[60] bg-navyVasa translate-x-full flex flex-col p-8">
+        <div class="flex justify-between items-center mb-16">
+            <span class="text-white font-titulo text-xl tracking-widest uppercase">Menú</span>
+            <button id="close-menu-btn" class="text-white text-3xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <nav class="flex flex-col gap-8 text-white font-titulo text-3xl italic">
+            <a href="index.html#socios" class="mobile-link hover:text-goldVasa transition">Socios</a>
+            <a href="index.html#estrategias" class="mobile-link hover:text-goldVasa transition">Estrategias</a>
+            <a href="index.html#evidencia" class="mobile-link hover:text-goldVasa transition">Evidencia de Resultados</a>
+            <a href="#consulta" class="mobile-link hover:text-goldVasa transition not-italic text-lg uppercase tracking-widest text-goldVasa mt-8">Contacto</a>
+        </nav>
+    </div>
+
+    <!-- HERO -->
+    <header class="pt-40 pb-20 bg-navyVasa text-white text-center">
+        <div class="max-w-4xl mx-auto px-6">
+            <p class="text-goldVasa font-bold tracking-[0.3em] uppercase text-[10px] mb-4">Práctica Jurídica</p>
+            <h1 class="font-titulo text-4xl md:text-5xl mb-4">Estrategias Legales</h1>
+            <div class="w-16 h-1 bg-goldVasa mx-auto"></div>
+            <p class="mt-8 text-gray-400 font-light tracking-wide text-sm max-w-xl mx-auto">
+                Soluciones jurídicas de precisión técnica en las áreas donde nuestra experiencia genera resultados medibles.
+            </p>
+        </div>
+    </header>
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <p class="text-goldVasa font-bold tracking-[0.3em] uppercase text-[10px] mb-2">Áreas de Práctica</p>
+            <h2 class="font-titulo font-bold text-3xl lg:text-4xl text-navyVasa">Nuestros Servicios</h2>
+            <div class="w-12 h-1 bg-goldVasa mx-auto mt-6"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- Derecho Administrativo -->
+            <div class="service-card bg-white p-8 shadow-sm">
+                <div class="flex items-start gap-5">
+                    <div class="text-goldVasa text-3xl mt-1">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <div>
+                        <span class="text-goldVasa font-bold tracking-[0.2em] uppercase text-[10px] block mb-2">Área I</span>
+                        <h3 class="font-titulo text-2xl mb-4">Derecho Administrativo</h3>
+                        <ul class="space-y-2 text-sm text-slateVasa leading-relaxed">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-goldVasa text-[10px] mt-1"></i> Vigilancia y asesoría en procedimientos de expropiación ante la CDMX</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-goldVasa text-[10px] mt-1"></i> Trámites y recursos ante dependencias gubernamentales</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-goldVasa text-[10px] mt-1"></i> Defensa en juicio de nulidad ante el TFJFA</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-goldVasa text-[10px] mt-1"></i> Impugnación de resoluciones administrativas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Derecho Fiscal -->
+            <div class="service-card bg-white p-8 shadow-sm">
+                <div class="flex items-start gap-5">
+                    <div class="text-goldVasa text-3xl mt-1">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
+                    <div>
+                        <span class="text-goldVasa font-bold tracking-[0.2em] uppercase text-[10px] block mb-2">Área II</span>
+                        <h3 class="font-titulo text-2xl mb-4">Derecho Fiscal</h3>
+                        <ul class="space-y-2 text-sm text-slateVasa leading-relaxed">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-goldVasa text-[10px] mt-1"></i> Dictaminación de créditos fiscales y fideicomisos públicos</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-goldVasa text-[10px] mt-1"></i> Defensa ante la Procuraduría Fiscal de la Federación</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-goldVasa text-[10px] mt-1"></i> Determinación e impugnación de delitos fiscales</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-goldVasa text-[10px] mt-1"></i> Estrategias de mediación con autoridades fiscales</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mediación Administrativa -->
+            <div class="service-card bg-white p-8 shadow-sm">
+                <div class="flex items-start gap-5">
+                    <div class="text-goldVasa text-3xl mt-1">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <div>
+                        <span class="text-goldVasa font-bold tracking-[0.2em] uppercase text-[10px] block mb-2">Área III</span>
+                        <h3 class="font-titulo text-2xl mb-4">Mediación Administrativa</h3>
+                        <ul class="space-y-2 text-sm text-slateVasa leading-relaxed">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-goldVasa text-[10px] mt-1"></i> Mediación en conflictos entre particulares y autoridades</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-goldVasa text-[10px] mt-1"></i> Argumentación oral ante instancias administrativas</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-goldVasa text-[10px] mt-1"></i> Negociación de acuerdos con dependencias públicas</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-goldVasa text-[10px] mt-1"></i> Acompañamiento en audiencias de conciliación</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Integración de Expedientes -->
+            <div class="service-card bg-white p-8 shadow-sm">
+                <div class="flex items-start gap-5">
+                    <div class="text-goldVasa text-3xl mt-1">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </div>
+                    <div>
+                        <span class="text-goldVasa font-bold tracking-[0.2em] uppercase text-[10px] block mb-2">Área IV</span>
+                        <h3 class="font-titulo text-2xl mb-4">Integración de Expedientes</h3>
+                        <ul class="space-y-2 text-sm text-slateVasa leading-relaxed">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-goldVasa text-[10px] mt-1"></i> Integración técnica de expedientes para juicio de nulidad</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-goldVasa text-[10px] mt-1"></i> Revisión y dictaminación documental</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-goldVasa text-[10px] mt-1"></i> Control de plazos y seguimiento procesal</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-goldVasa text-[10px] mt-1"></i> Garantía de rigor técnico: cero fallas de procedimiento</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PROCESO -->
+    <section id="proceso" class="py-24 bg-navyVasa">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="text-goldVasa font-bold tracking-[0.3em] uppercase text-[10px] mb-2">Metodología</p>
+                <h2 class="font-titulo font-bold text-3xl lg:text-4xl text-white">Proceso de Trabajo</h2>
+                <div class="w-12 h-1 bg-goldVasa mx-auto mt-6"></div>
+            </div>
+
+            <div class="flex flex-col gap-0">
+
+                <!-- Paso 1 -->
+                <div class="flex gap-8 items-start">
+                    <div class="flex flex-col items-center">
+                        <div class="step-number">01</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="pb-12 pt-2">
+                        <h3 class="font-titulo text-xl text-white mb-2">Consulta inicial</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Escuchamos su situación jurídica en detalle. Identificamos el problema, el área de derecho involucrada y los plazos críticos. Sin costo, sin compromiso.</p>
+                    </div>
+                </div>
+
+                <!-- Paso 2 -->
+                <div class="flex gap-8 items-start">
+                    <div class="flex flex-col items-center">
+                        <div class="step-number">02</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="pb-12 pt-2">
+                        <h3 class="font-titulo text-xl text-white mb-2">Diagnóstico y estrategia</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Analizamos la documentación y el marco normativo aplicable. Diseñamos una estrategia procesal precisa con rutas alternativas y evaluación de riesgos.</p>
+                    </div>
+                </div>
+
+                <!-- Paso 3 -->
+                <div class="flex gap-8 items-start">
+                    <div class="flex flex-col items-center">
+                        <div class="step-number">03</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="pb-12 pt-2">
+                        <h3 class="font-titulo text-xl text-white mb-2">Integración del expediente</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Reunimos y ordenamos toda la documentación necesaria. Verificamos plazos, requisitos formales y fundamentos jurídicos antes de cualquier presentación ante autoridad.</p>
+                    </div>
+                </div>
+
+                <!-- Paso 4 -->
+                <div class="flex gap-8 items-start">
+                    <div class="flex flex-col items-center">
+                        <div class="step-number">04</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="pb-12 pt-2">
+                        <h3 class="font-titulo text-xl text-white mb-2">Defensa y representación</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Ejecutamos la estrategia con rigor procedimental. Representamos al cliente ante autoridades administrativas, fiscales o en juicio, con argumentación técnica y elocuencia estratégica.</p>
+                    </div>
+                </div>
+
+                <!-- Paso 5 -->
+                <div class="flex gap-8 items-start">
+                    <div class="flex flex-col items-center">
+                        <div class="step-number">05</div>
+                    </div>
+                    <div class="pt-2">
+                        <h3 class="font-titulo text-xl text-white mb-2">Seguimiento y cierre</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Informamos puntualmente sobre el avance del caso. Una vez obtenida la resolución, asesoramos sobre su correcta ejecución y los pasos siguientes.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMULARIO DE CONSULTA -->
+    <section id="consulta" class="py-24 bg-fondoVasa">
+        <div class="max-w-2xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <p class="text-goldVasa font-bold tracking-[0.3em] uppercase text-[10px] mb-2">Primer Paso</p>
+                <h2 class="font-titulo font-bold text-3xl lg:text-4xl text-navyVasa">Solicitar Consulta</h2>
+                <div class="w-12 h-1 bg-goldVasa mx-auto mt-6 mb-6"></div>
+                <p class="text-sm text-slateVasa">Cuéntenos su situación. Uno de nuestros socios se pondrá en contacto con usted a la brevedad.</p>
+            </div>
+
+            <div class="bg-white shadow-sm p-8 lg:p-12">
+                <div id="form-container" class="space-y-6">
+
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-widest text-navyVasa mb-2">Nombre completo</label>
+                        <input id="f-nombre" type="text" class="form-input" placeholder="Ej. María García López">
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-widest text-navyVasa mb-2">Teléfono de contacto</label>
+                        <input id="f-telefono" type="tel" class="form-input" placeholder="55 1234 5678">
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-widest text-navyVasa mb-2">Área jurídica</label>
+                        <select id="f-area" class="form-input">
+                            <option value="" disabled selected>Seleccione un área</option>
+                            <option>Derecho Administrativo</option>
+                            <option>Derecho Fiscal</option>
+                            <option>Mediación Administrativa</option>
+                            <option>Integración de Expediente</option>
+                            <option>No lo sé aún</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-widest text-navyVasa mb-2">Problema a resolver</label>
+                        <textarea id="f-problema" rows="5" class="form-input resize-none" placeholder="Describa brevemente su situación jurídica, los hechos relevantes y, de ser posible, los plazos involucrados…"></textarea>
+                    </div>
+
+                    <div id="form-error" class="hidden text-xs text-red-600 font-semibold pt-1">
+                        Por favor complete todos los campos antes de enviar.
+                    </div>
+
+                    <button id="btn-enviar" class="btn-send mt-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        Enviar consulta por WhatsApp
+                    </button>
+
+                    <p class="text-[10px] text-slateVasa text-center tracking-wide">
+                        Al enviar, será redirigido a WhatsApp con su consulta pre-redactada.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contacto" class="bg-navyVasa text-white py-20 border-t-8 border-goldVasa">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <img src="logo.png" alt="Logo VASA" class="h-14 mx-auto mb-8 brightness-0 invert"
+                 onerror="this.src='https://placehold.co/120x60/ffffff/b8913a?text=VASA';">
+            <h3 class="font-titulo text-2xl mb-10">Grupo y Estrategias Legales VASA</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-[10px] tracking-widest uppercase mb-16 w-full max-w-5xl mx-auto">
+                <div class="flex flex-col gap-3">
+                    <span class="text-goldVasa font-bold flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-location-dot"></i> Ubicación
+                    </span>
+                    <span class="text-gray-400 normal-case tracking-normal text-[11px]">
+                        Iztacalco, Ciudad de México<br>C.P. 08100
+                    </span>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="text-goldVasa font-bold flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                    </span>
+                    <span class="text-gray-400 normal-case tracking-normal text-[11px]">
+                        <a href="https://wa.me/525628472872" target="_blank" class="hover:text-goldVasa transition block">56 2847 2872</a>
+                    </span>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="text-goldVasa font-bold flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-phone"></i> Llamadas
+                    </span>
+                    <span class="text-gray-400 normal-case tracking-normal text-[11px]">
+                        <a href="tel:5628472872" class="hover:text-goldVasa transition block">56 2847 2872</a>
+                        <a href="tel:5559620946" class="hover:text-goldVasa transition block">55 5962 0946</a>
+                    </span>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="text-goldVasa font-bold flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-envelope"></i> Correo
+                    </span>
+                    <span class="text-gray-400 normal-case tracking-normal text-[11px]">
+                        <a href="mailto:josuesantiagodls@gmail.com" class="hover:text-goldVasa transition block">josuesantiagodls@gmail.com</a>
+                        <a href="mailto:luisaitzelv@gmail.com" class="hover:text-goldVasa transition block">luisaitzelv@gmail.com</a>
+                    </span>
+                </div>
+            </div>
+
+            <div class="flex justify-center pt-10 border-t border-white/10">
+                <p class="text-[9px] text-gray-500 tracking-[0.3em]">© 2026 VASA. TODOS LOS DERECHOS RESERVADOS.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menú hamburguesa
+        const burgerBtn = document.getElementById('hamburger-btn');
+        const closeBtn  = document.getElementById('close-menu-btn');
+        const overlay   = document.getElementById('menu-overlay');
+        const links     = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            overlay.classList.toggle('translate-x-full');
+            document.body.style.overflow = overlay.classList.contains('translate-x-full') ? '' : 'hidden';
+        }
+        burgerBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        links.forEach(l => l.addEventListener('click', toggleMenu));
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') { overlay.classList.add('translate-x-full'); document.body.style.overflow = ''; }
+        });
+
+        // Formulario → WhatsApp
+        document.getElementById('btn-enviar').addEventListener('click', () => {
+            const nombre   = document.getElementById('f-nombre').value.trim();
+            const telefono = document.getElementById('f-telefono').value.trim();
+            const area     = document.getElementById('f-area').value;
+            const problema = document.getElementById('f-problema').value.trim();
+            const errorEl  = document.getElementById('form-error');
+
+            if (!nombre || !telefono || !area || !problema) {
+                errorEl.classList.remove('hidden');
+                return;
+            }
+            errorEl.classList.add('hidden');
+
+            const mensaje =
+                `*Consulta VASA*\n\n` +
+                `*Nombre:* ${nombre}\n` +
+                `*Teléfono:* ${telefono}\n` +
+                `*Área jurídica:* ${area}\n\n` +
+                `*Problema a resolver:*\n${problema}`;
+
+            const url = `https://wa.me/525628472872?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+        });
+    </script>
+</body>
+</html>

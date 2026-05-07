@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Socios | Grupo y Estrategias Legales VASA</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navyVasa: '#0a192f',
+                        goldVasa: '#b8913a',
+                        fondoVasa: '#f8f9fa',
+                        slateVasa: '#64748b',
+                    },
+                    fontFamily: {
+                        titulo: ['Playfair Display', 'serif'],
+                        cuerpo: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .partner-img-container {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(184, 145, 58, 0.3);
+            padding: 8px;
+            background: white;
+        }
+        .partner-img-container::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 1px solid #b8913a;
+            transform: translate(10px, 10px);
+            z-index: -1;
+        }
+        .btn-cv {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: #0a192f;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .btn-cv:hover { background: #b8913a; }
+        html { scroll-behavior: smooth; }
+
+        /* Menú overlay */
+        #menu-overlay { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-fondoVasa font-cuerpo text-navyVasa antialiased overflow-x-hidden">
+
+    <!-- NAV BAR: idéntico al original + hamburguesa universal -->
+    <nav class="bg-white/95 backdrop-blur-md shadow-sm fixed w-full z-50 h-20">
+        <div class="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <a href="index.html"><img src="logo.png" alt="VASA Logo" class="h-10 w-auto"></a>
+                <div class="hidden sm:block border-l border-gray-200 pl-4">
+                    <span class="block font-titulo font-bold text-xl">VASA</span>
+                    <span class="block text-[9px] uppercase tracking-[0.2em] text-goldVasa font-bold">Socios Fundadores</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://wa.me/525628472872" target="_blank"
+                   class="px-4 py-2 bg-navyVasa text-white font-bold text-[10px] lg:text-xs rounded-sm hover:bg-goldVasa transition flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-sm lg:text-lg"></i> <span>CONTACTO</span>
+                </a>
+                <!-- Hamburguesa: visible en todos los breakpoints -->
+                <button id="hamburger-btn" class="text-navyVasa text-2xl p-1 hover:text-goldVasa transition">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- OVERLAY del menú -->
+    <div id="menu-overlay" class="fixed inset-0 z-[60] bg-navyVasa translate-x-full flex flex-col p-8">
+        <div class="flex justify-between items-center mb-16">
+            <span class="text-white font-titulo text-xl tracking-widest uppercase">Menú</span>
+            <button id="close-menu-btn" class="text-white text-3xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <nav class="flex flex-col gap-8 text-white font-titulo text-3xl italic">
+            <a href="index.html#socios" class="mobile-link hover:text-goldVasa transition">Socios</a>
+            <a href="index.html#estrategias" class="mobile-link hover:text-goldVasa transition">Estrategias</a>
+            <a href="index.html#evidencia" class="mobile-link hover:text-goldVasa transition">Evidencia de Resultados</a>
+            <a href="#contacto" class="mobile-link hover:text-goldVasa transition not-italic text-lg uppercase tracking-widest text-goldVasa mt-8">Contacto</a>
+        </nav>
+    </div>
+
+    <header class="pt-40 pb-20 bg-navyVasa text-white text-center">
+        <div class="max-w-4xl mx-auto px-6">
+            <h1 class="font-titulo text-4xl md:text-5xl mb-4">Cuerpo Directivo</h1>
+            <div class="w-16 h-1 bg-goldVasa mx-auto"></div>
+            <p class="mt-8 text-gray-400 font-light tracking-wide uppercase text-xs">Excelencia Jurídica • Compromiso Ético • Especialización Técnica</p>
+        </div>
+    </header>
+
+    <main class="py-24 max-w-7xl mx-auto px-6 space-y-32">
+        
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-5 order-2 lg:order-1">
+                <div class="partner-img-container max-w-sm mx-auto lg:mx-0">
+                    <img src="imagen1.png" alt="Lic. Luisa Itzel Vara Morales" class="w-full h-auto object-cover"
+                         onerror="this.src='https://placehold.co/500x600?text=Socia+Fundadora';">
+                </div>
+            </div>
+            <div class="lg:col-span-7 order-1 lg:order-2">
+                <span class="text-goldVasa font-bold tracking-[0.2em] uppercase text-xs mb-2 block">Derecho Administrativo & Procesal</span>
+                <h2 class="font-titulo text-4xl mb-6">Luisa Itzel Vara Morales</h2>
+                <div class="space-y-6 text-gray-600 leading-relaxed mb-8">
+                    <p>Licenciada en Derecho por la <strong>Universidad Nacional Autónoma de México (FES Aragón)</strong>. Su práctica se especializa en la vigilancia de procedimientos de expropiación y la determinación de delitos fiscales.</p>
+                </div>
+                <a href="CV_Itzel_Vara.pdf" target="_blank" class="btn-cv">
+                    <i class="fa-solid fa-file-pdf"></i> Visualizar Trayectoria
+                </a>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7">
+                <span class="text-goldVasa font-bold tracking-[0.2em] uppercase text-xs mb-2 block">Derecho Fiscal & Mediación</span>
+                <h2 class="font-titulo text-4xl mb-6">Josué Esteban Santiago de los Santos</h2>
+                <div class="space-y-6 text-gray-600 leading-relaxed mb-8">
+                    <p>Licenciado en Derecho por la <strong>Universidad Nacional Autónoma de México (FES Aragón)</strong>. Experto en la dictaminación de fideicomisos públicos y mediación administrativa con enfoque en argumentación oral.</p>
+                </div>
+                <a href="CV_Josue_Santiago.pdf" target="_blank" class="btn-cv">
+                    <i class="fa-solid fa-file-pdf"></i> Visualizar Trayectoria
+                </a>
+            </div>
+            <div class="lg:col-span-5">
+                <div class="partner-img-container max-w-sm mx-auto lg:mr-0">
+                    <img src="imagen2.png" alt="Lic. Josué Esteban Santiago de los Santos" class="w-full h-auto object-cover"
+                         onerror="this.src='https://placehold.co/500x600?text=Socio+Fundador';">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER: todos los métodos de contacto -->
+    <footer id="contacto" class="bg-navyVasa text-white py-20 border-t-8 border-goldVasa">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h3 class="font-titulo text-2xl mb-10">Grupo y Estrategias Legales VASA</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-[10px] tracking-widest uppercase mb-16 w-full max-w-5xl mx-auto">
+                <!-- Ubicación -->
+                <div class="flex flex-col gap-3">
+                    <span class="text-goldVasa font-bold flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-location-dot"></i> Ubicación
+                    </span>
+                    <span class="text-gray-400 normal-case tracking-normal text-[11px]">
+                        Iztacalco, Ciudad de México<br>C.P. 08100
+                    </span>
+                </div>
+                <!-- WhatsApp -->
+                <div class="flex flex-col gap-3">
+                    <span class="text-goldVasa font-bold flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                    </span>
+                    <span class="text-gray-400 normal-case tracking-normal text-[11px]">
+                        <a href="https://wa.me/525628472872" target="_blank" class="hover:text-goldVasa transition block">56 2847 2872</a>
+                    </span>
+                </div>
+                <!-- Llamadas -->
+                <div class="flex flex-col gap-3">
+                    <span class="text-goldVasa font-bold flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-phone"></i> Llamadas
+                    </span>
+                    <span class="text-gray-400 normal-case tracking-normal text-[11px]">
+                        <a href="tel:5628472872" class="hover:text-goldVasa transition block">56 2847 2872</a>
+                        <a href="tel:5559620946" class="hover:text-goldVasa transition block">55 5962 0946</a>
+                    </span>
+                </div>
+                <!-- Correo -->
+                <div class="flex flex-col gap-3">
+                    <span class="text-goldVasa font-bold flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-envelope"></i> Correo
+                    </span>
+                    <span class="text-gray-400 normal-case tracking-normal text-[11px]">
+                        <a href="mailto:josuesantiagodls@gmail.com" class="hover:text-goldVasa transition block">josuesantiagodls@gmail.com</a>
+                        <a href="mailto:luisaitzelv@gmail.com" class="hover:text-goldVasa transition block">luisaitzelv@gmail.com</a>
+                    </span>
+                </div>
+            </div>
+
+            <div class="flex justify-center pt-10 border-t border-white/10">
+                <p class="text-[9px] text-gray-500 tracking-[0.3em]">© 2026 VASA. TODOS LOS DERECHOS RESERVADOS.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const burgerBtn = document.getElementById('hamburger-btn');
+        const closeBtn  = document.getElementById('close-menu-btn');
+        const overlay   = document.getElementById('menu-overlay');
+        const links     = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            overlay.classList.toggle('translate-x-full');
+            document.body.style.overflow = overlay.classList.contains('translate-x-full') ? '' : 'hidden';
+        }
+
+        burgerBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        links.forEach(l => l.addEventListener('click', toggleMenu));
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') { overlay.classList.add('translate-x-full'); document.body.style.overflow = ''; } });
+    </script>
+</body>
+</html>
